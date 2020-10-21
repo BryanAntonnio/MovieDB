@@ -6,4 +6,5 @@
     <string name="toDetail">To Detail</string>
     <string name="movies">Movies</string>
     <string name="tv_shows">TV Shows</string>
+    <string name="error_occurred">Error</string>
 </resources>
