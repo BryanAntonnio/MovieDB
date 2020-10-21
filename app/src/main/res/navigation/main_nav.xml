@@ -12,12 +12,14 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/actionSplashMovie"
-            app:destination="@id/movieFragment" />
+            app:destination="@id/nav_movie"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
-        android:id="@+id/movieFragment"
+        android:id="@+id/nav_movie"
         android:name="com.uc.moviedb_0706011910022.ui.movie.MovieFragment"
-        android:label="fragment_movie"
+        android:label="@string/movies"
         tools:layout="@layout/fragment_movie" >
         <action
             android:id="@+id/actionMovieDetail"
@@ -30,9 +32,18 @@
         tools:layout="@layout/fragment_detail" >
         <action
             android:id="@+id/actionDetailMovie"
-            app:destination="@id/movieFragment" />
+            app:destination="@id/nav_movie" />
         <argument
             android:name="Movie"
             app:argType="com.uc.moviedb_0706011910022.model.Movie" />
+    </fragment>
+    <fragment
+        android:id="@+id/navTvShow"
+        android:name="com.uc.moviedb_0706011910022.ui.tvShow.TvShowFragment"
+        android:label="@string/tv_shows"
+        tools:layout="@layout/fragment_tv_show" >
+        <action
+            android:id="@+id/TvShowDetail"
+            app:destination="@id/detailFragment" />
     </fragment>
 </navigation>

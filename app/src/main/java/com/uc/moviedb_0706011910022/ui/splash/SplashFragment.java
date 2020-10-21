@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.uc.moviedb_0706011910022.R;
+import com.uc.moviedb_0706011910022.ui.MainActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,5 +47,17 @@ public class SplashFragment extends Fragment {
             NavDirections action = SplashFragmentDirections.actionSplashMovie();
             Navigation.findNavController(v).navigate(action);
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ((MainActivity) getActivity()).getSupportActionBar().hide();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
     }
 }

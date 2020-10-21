@@ -67,6 +67,7 @@ public class MovieFragment extends Fragment {
         public void onChanged(List<Movie> movies) {
             if (movies != null){
                 Movie movie = movies.get(0);
+                button.setText(movie.getTitle());
                 Toast.makeText(requireActivity(), movie.getTitle(), Toast.LENGTH_SHORT).show();
                 //set Adapter
 //                adapter.setMovies(movies);
