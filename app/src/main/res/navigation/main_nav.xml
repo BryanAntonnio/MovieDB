@@ -36,6 +36,8 @@
         <argument
             android:name="Movie"
             app:argType="com.uc.moviedb_0706011910022.model.Movie" />
+        <argument android:name="tvShow"
+            app:argType="com.uc.moviedb_0706011910022.model.TvShow" />
     </fragment>
     <fragment
         android:id="@+id/navTvShow"

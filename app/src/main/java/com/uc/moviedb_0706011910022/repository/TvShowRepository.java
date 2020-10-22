@@ -8,67 +8,76 @@ import com.uc.moviedb_0706011910022.model.Cast;
 import com.uc.moviedb_0706011910022.model.CastResponse;
 import com.uc.moviedb_0706011910022.model.Genre;
 import com.uc.moviedb_0706011910022.model.GenreResponse;
-import com.uc.moviedb_0706011910022.model.Movie;
-import com.uc.moviedb_0706011910022.model.MovieResponse;
+import com.uc.moviedb_0706011910022.model.TvShow;
+import com.uc.moviedb_0706011910022.model.TvShowResponse;
 import com.uc.moviedb_0706011910022.network.ApiEndpoints;
 import com.uc.moviedb_0706011910022.network.RetrofitService;
 import com.uc.moviedb_0706011910022.util.Constants;
 
 import java.util.List;
 
-import io.reactivex.disposables.CompositeDisposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MovieRepository {
+public class TvShowRepository {
 
-    private static MovieRepository movieRepository;
+    private static TvShowRepository tvShowRepository;
+    private ApiEndpoints apiEndpoints;
     private RetrofitService service;
-    private static final String TAG = "MovieRepository"; //ketik logt biar langsung muncul TAGnya
-    private MutableLiveData<List<Movie>> listMovies = new MutableLiveData<>();
-    private CompositeDisposable disposable = new CompositeDisposable();
+    private static final String TAG = "TvShowRepository";
 
-    private MovieRepository(){
+//    public MovieRepository(ApiEndpoints apiEndpoints) {
+//        this.apiEndpoints = apiEndpoints;
+//    }
+
+    private TvShowRepository() {
         service = RetrofitService.getInstance();
     }
 
-    public static MovieRepository getInstance(){
-        if (movieRepository == null){
-            movieRepository = new MovieRepository();
+//    public static MovieRepository getInstance() {
+//        if (movieRepository == null) {
+//            movieRepository = new MovieRepository(RetrofitService.createService(ApiEndpoints.class));
+//        }
+//        return movieRepository;
+//    }
+
+
+    public static TvShowRepository getInstance() {
+        if (tvShowRepository == null) {
+            tvShowRepository = new TvShowRepository();
         }
-        return movieRepository;
+        return tvShowRepository;
     }
 
-    public MutableLiveData<List<Movie>> getMovieCollection() {
-        MutableLiveData<List<Movie>> listMovie = new MutableLiveData<>();
 
-        service.getMovies().enqueue(new Callback<MovieResponse>() {
+    public MutableLiveData<List<TvShow>> getTvShowCollection() {
+        MutableLiveData<List<TvShow>> listTvShow = new MutableLiveData<>();
+
+        service.getTvShow().enqueue(new Callback<TvShowResponse>() {
             @Override
-            public void onResponse(Call<MovieResponse> call, Response<MovieResponse> response) {
-
-                if (response.isSuccessful()){
-                    if (response.body()!= null){
-                        listMovie.postValue(response.body().getResults());
+            public void onResponse(Call<TvShowResponse> call, Response<TvShowResponse> response) {
+                if (response.isSuccessful()) {
+                    if (response.body() != null) {
+                        listTvShow.postValue(response.body().getResults());
                     }
+
                 }
             }
 
-
             @Override
-            public void onFailure(Call<MovieResponse> call, Throwable t) {
-
+            public void onFailure(Call<TvShowResponse> call, Throwable t) {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
 
-        return listMovie;
+        return listTvShow;
     }
 
     public MutableLiveData<List<Genre>> getGenres(int id) {
         MutableLiveData<List<Genre>> listGenres = new MutableLiveData<>();
 
-        service.getGenre(Constants.Type.MOVIES, id).enqueue(new Callback<GenreResponse>() {
+        service.getGenre(Constants.Type.TV_SHOWS, id).enqueue(new Callback<GenreResponse>() {
             @Override
             public void onResponse(Call<GenreResponse> call, Response<GenreResponse> response) {
                 Log.d(TAG, "onResponse: " + response.code());
@@ -85,13 +94,14 @@ public class MovieRepository {
                 Log.d(TAG, "onFailure: " + t.getMessage());
             }
         });
+
         return listGenres;
     }
 
     public MutableLiveData<List<Cast>> getCasts(int id) {
         MutableLiveData<List<Cast>> listCasts = new MutableLiveData<>();
 
-        service.getCast(Constants.Type.MOVIES, id).enqueue(new Callback<CastResponse>() {
+        service.getCast(Constants.Type.TV_SHOWS, id).enqueue(new Callback<CastResponse>() {
             @Override
             public void onResponse(Call<CastResponse> call, Response<CastResponse> response) {
                 Log.d(TAG, "onResponse: " + response.code());

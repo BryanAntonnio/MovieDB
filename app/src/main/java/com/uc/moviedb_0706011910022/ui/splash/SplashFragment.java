@@ -23,7 +23,7 @@ import butterknife.ButterKnife;
 
 public class SplashFragment extends Fragment {
 
-    @BindView(R.id.btn_splash)
+    @BindView(R.id.button_splash)
     Button button;
 
     public SplashFragment() {
@@ -34,8 +34,7 @@ public class SplashFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_splash, container, false);
-        return view;
+        return inflater.inflate(R.layout.fragment_splash, container, false);
     }
 
     @Override
@@ -45,7 +44,7 @@ public class SplashFragment extends Fragment {
 
         button.setOnClickListener(v -> {
             NavDirections action = SplashFragmentDirections.actionSplashMovie();
-            Navigation.findNavController(v).navigate(action);
+            Navigation.findNavController(view).navigate(action);
         });
     }
 
@@ -58,6 +57,6 @@ public class SplashFragment extends Fragment {
     @Override
     public void onStop() {
         super.onStop();
-        ((AppCompatActivity)getActivity()).getSupportActionBar().show();
+        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 }
