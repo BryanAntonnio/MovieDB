@@ -2,7 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_movie"
-        android:title="@string/movies"/>
+        android:icon="@drawable/ic_chrome_reader_mode_black_18dp"
+        android:title="@string/movies" />
 
     <item
         android:id="@+id/nav_tv"
