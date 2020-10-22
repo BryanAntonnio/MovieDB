@@ -25,13 +25,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        BottomNavigationView navigationView = findViewById(R.id.main_nav);
-        AppBarConfiguration configuration = new AppBarConfiguration.Builder(R.id.nav_movie, R.id.nav_tv ).build();
+        BottomNavigationView navigationView = findViewById(R.id.navbarmovie);
+
+        AppBarConfiguration configuration = new AppBarConfiguration.Builder(R.id.nav_movie, R.id.navTvShow).build();
 
         navController = Navigation.findNavController(this, R.id.fragment);
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            if (destination.getId() == R.id.nav_movie || destination.getId() == R.id.nav_tv){
+            if (destination.getId() == R.id.nav_movie || destination.getId() == R.id.navTvShow) {
                 navigationView.setVisibility(View.VISIBLE);
             } else {
                 navigationView.setVisibility(View.GONE);
@@ -40,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
         NavigationUI.setupActionBarWithNavController(this, navController, configuration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
     }
 
     @Override
